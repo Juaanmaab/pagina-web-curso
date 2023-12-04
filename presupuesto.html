@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>El deportista</h1>
+    </header>
+
+    <nav>
+        
+        <a href="index.html">Inicio</a>
+        <a href="galeria.html">Galeria</a>
+        <a href="presupuesto.html" class="red">Presupuesto</a>
+        <a href="contacto.html">Contacto</a>
+
+    </nav>
+
+    <form id="formularioPresupuesto">
+        <fieldset>
+            <legend>Datos de contacto</legend>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" maxlength="15" pattern="[A-Za-zÑñÁáÉéÍíÓóÚú\s]+" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" maxlength="40" pattern="[A-Za-zÑñÁáÉéÍíÓóÚú\s]+" required>
+
+            <label for="telefono">Teléfono de contacto:</label>
+            <input type="tel" id="telefono" name="telefono" maxlength="9" pattern="[0-9]+" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Presupuesto</legend>
+            <label for="producto">Producto:</label>
+            <select id="producto" name="producto" required>
+                <option value="opcion1" data-precio="100">Opción 1 - $100</option>
+                <option value="opcion2" data-precio="150">Opción 2 - $150</option>
+                <option value="opcion3" data-precio="200">Opción 3 - $200</option>
+            </select>
+
+            <label for="plazo">Plazo (en meses):</label>
+            <input type="number" id="plazo" name="plazo" min="1" required value="12">
+
+            <label>Extras:</label>
+            <input type="checkbox" id="extra1" name="extras" value="extra1" data-precio="30">
+            <label for="extra1">Extra 1 - $30</label>
+            <br>
+            <input type="checkbox" id="extra2" name="extras" value="extra2" data-precio="50">
+            <label for="extra2">Extra 2 - $50</label>
+        </fieldset>
+
+        <div id="presupuesto">
+            <h2>Presupuesto Final: $<span id="total">0</span></h2>
+        </div>
+
+        <label>
+            <input type="checkbox" id="aceptarCondiciones" required>
+            Acepto las condiciones de privacidad
+        </label>
+
+        <button type="submit">Enviar Presupuesto</button>
+        <button type="reset">Resetear Formulario</button>
+    </form>
+
+    <footer>
+        <p>Redes Sociales</p>
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Instagram</a>
+        <p>Dirección de la Empresa: C. de Alberto Aguilera,14, Madrid</p>
+        <p>Aviso Legal: Este sitio web es solo con fines informativos. Consulta a un profesional legal para obtener asesoramiento específico.</p>
+    </footer>
+
+    <script>
+        const formulario = document.getElementById('formularioPresupuesto');
+        const totalElement = document.getElementById('total');
+        const productoSelect = document.getElementById('producto');
+        const plazoInput = document.getElementById('plazo');
+        const extrasCheckboxes = document.querySelectorAll('input[name="extras"]');
+        const aceptarCondicionesCheckbox = document.getElementById('aceptarCondiciones');
+
+        formulario.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Realizar acciones adicionales al enviar el formulario
+            alert('Formulario enviado');
+        });
+
+formulario.addEventListener('input', function () {
+    calcularPresupuesto();
+});
+
+function calcularPresupuesto() {
+    let presupuesto = parseFloat(productoSelect.options[productoSelect.selectedIndex].getAttribute('data-precio')) || 0;
+    presupuesto += parseFloat(plazoInput.value) * 10;
+
+    extrasCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            presupuesto += parseFloat(checkbox.getAttribute('data-precio')) || 0;
+        }
+    });
+
+    totalElement.textContent = presupuesto.toFixed(2);
+}
+</script>
+
+</body>
+</html>

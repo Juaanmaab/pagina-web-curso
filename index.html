@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" href="css/estilos.css">
+
+</head>
+<body>
+
+    <header>
+        <h1>El Deportista</h1>
+    </header>
+
+    <nav>
+        <a href="#" class="red">Inicio</a>
+        <a href="galeria.html">Galeria</a>
+        <a href="presupuesto.html">Presupuesto</a>
+        <a href="contacto.html">Contacto</a>
+       
+    </nav>
+
+    <section id="inicio">
+        <h2>Portada</h2>
+        <p>La pagina de Deportes que te da la información del dia a dia al alcance de todos.</p>
+    </section>
+
+    <section id="seccion1">
+        <h2>Sección 1</h2>
+        <p>Ultimos premios y posiciones</p>
+    </section>
+
+    <section id="seccion2">
+        <h2>Sección 2</h2>
+        <p>Lo mas buscado</p>
+    </section>
+
+    <section id="noticias">
+        <h2>Noticias</h2>
+        <div id="noticias-container"></div>
+    </section>
+
+    <footer>
+        <p>Redes Sociales</p>
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Instagram</a>
+        <p>Dirección de la Empresa: C. de Alberto Aguilera,14, Madrid</p>
+        <p>Aviso Legal: Este sitio web es solo con fines informativos. Consulta a un profesional legal para obtener asesoramiento específico.</p>
+    </footer>
+
+    <script>
+        
+        fetch('js/noticias.json')
+            .then(response => response.json())
+            .then(data => {
+                const noticiasContainer = document.getElementById('noticias-container');
+
+                data.forEach(noticia => {
+                    const noticiaElement = document.createElement('div');
+                    noticiaElement.classList.add('noticia');
+                    noticiaElement.innerHTML = `
+                        <h3>${noticia.titulo}</h3>
+                        <p>${noticia.descripcion}</p>
+                        <p><strong>Fecha:</strong> ${noticia.fecha}</p>
+                    `;
+                    noticiasContainer.appendChild(noticiaElement);
+                });
+            })
+            .catch(error => console.error('Error al cargar noticias:', error));
+    </script>
+    
+</body>
+</html>

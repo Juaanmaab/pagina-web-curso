@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="css/estilos.css">
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>El Deportista</h1>
+    </header>
+
+    <nav>
+        
+        <a href="index.html">Inicio</a>
+        <a href="galeria.html">Galeria</a>
+        <a href="presupuesto.html">Presupuesto</a>
+        <a href="contacto.html" class="red">Contacto</a>
+        
+       
+    </nav>
+
+    <div id="mapa"></div>
+
+    <div id="datosContacto">
+        <h2>Datos de contacto</h2>
+        <p>Dirección: C. de Alberto Aguilera,14, Madrid</p>
+        <p>Teléfono: +34 123 456 789</p>
+        <p>Correo electrónico: ElDeportista@tuperiodicodeconfianza.com</p>
+    </div>
+
+    <footer>
+        <p>Redes Sociales</p>
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Instagram</a>
+    <p>Dirección de la Empresa: C. de Alberto Aguilera,14, Madrid</p>
+    <p>Aviso Legal: Este sitio web es solo con fines informativos. Consulta a un profesional legal para obtener asesoramiento específico.</p>
+</footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script>
+        // Coordenadas del centro del mapa (ubicación del negocio)
+        const ubicacionNegocio = [40.4303519, -3.7140295];
+
+        // Coordenadas del punto de partida (cliente)
+        const puntoPartida = [39.464789, -0.46076];
+
+        // Coordenadas del punto de destino (negocio)
+        const puntoDestino = ubicacionNegocio;
+
+        // Inicializar el mapa
+        const mapa = L.map('mapa').setView(ubicacionNegocio, 15);
+
+        // Capa del mapa de OpenStreetMap
+        const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        });
+
+        // Añadir la capa al mapa
+        capaOSM.addTo(mapa);
+
+        // Marcador en la ubicación del negocio
+        L.marker(ubicacionNegocio).addTo(mapa)
+            .bindPopup('Ubicación de Tu Negocio')
+            .openPopup();
+
+        // Control de rutas con punto de partida y destino
+        const controlRutas = L.Routing.control({
+            waypoints: [
+                L.latLng(puntoPartida),  // Punto de partida (ubicación del cliente)
+                L.latLng(puntoDestino)  // Punto de destino (ubicación del negocio)
+            ],
+            routeWhileDragging: true
+        }).addTo(mapa);
+    </script>
+</body>
+</html>

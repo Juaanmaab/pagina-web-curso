@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>El Deportista</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="galeria.html" class="red">Galeria</a>
+        <a href="presupuesto.html">Presupuesto</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <div id="galeria">
+        
+    </div>
+
+    <footer>
+        
+        <p>Redes Sociales</p>
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Instagram</a>
+        <p>Dirección de la Empresa: C. de Alberto Aguilera,14, Madrid</p>
+        <p>Aviso Legal: Este sitio web es solo con fines informativos. Consulta a un profesional legal para obtener asesoramiento específico.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        
+        const imagenes = [
+            "./IMAGES/noticia1.jpg",
+            "./IMAGES/noticia2.jpg",
+            "./IMAGES/noticia3.jpg",
+            "./IMAGES/noticia4.jpg",
+            "./IMAGES/madrid.jpg",
+            
+        ];
+
+        const galeriaContainer = document.getElementById('galeria');
+
+        imagenes.forEach((imagen, index) => {
+            const imagenElement = document.createElement('a');
+            imagenElement.href = imagen;
+            imagenElement.classList.add('imagen');
+            imagenElement.setAttribute('data-lightbox', 'galeria');
+            imagenElement.setAttribute('data-title', `Imagen ${index + 1}`);
+            
+            const img = document.createElement('img');
+            img.src = imagen;
+            img.alt = `Imagen ${index + 1}`;
+            img.style.width = '300px'; 
+            
+            imagenElement.appendChild(img);
+            galeriaContainer.appendChild(imagenElement);
+        });
+    </script>
+
+</body>
+</html>
